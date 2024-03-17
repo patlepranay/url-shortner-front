@@ -1,11 +1,31 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./pages/landing";
+import DashboardPage from "./pages/dashboard";
+import SignInPage from "./pages/sign-in";
+import SignUpPage from "./pages/sign-up";
+import ShortUrlRedirect from "./pages/shortUrlRedirect";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage/>,
+      element: <LandingPage />,
+    },
+    {
+      path: "/dashboard",
+      element: <DashboardPage />,
+    },
+    {
+      path: "/sign-in",
+      element: <SignInPage />,
+    },
+    {
+      path: "/sign-up",
+      element: <SignUpPage />,
+    },
+    {
+      path: "/:shortUrl",
+      element: <ShortUrlRedirect />,
     },
   ]);
 
