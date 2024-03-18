@@ -1,6 +1,6 @@
 import { incrementLinkVisit } from "@/lib/api";
 import { useEffect } from "react";
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 
 const ShortUrlRedirect = () => {
   const { shortUrl } = useParams();

@@ -26,7 +26,7 @@ const CustomLinkForm = () => {
     setUserInput(updatedInput);
   };
 
-  const checkCustomUrlAvailaibility = async (e) => {
+  const checkCustomUrlAvailaibility = async (e:React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log("first");
     const token = await getToken();
