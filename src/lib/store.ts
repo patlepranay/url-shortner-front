@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
-type Link = {
-  longUrl: string;
+
+export type Link = {
+  id: string;
+  originalUrl: string;
   shortUrl: string;
-  createdAt: Date;
+  createdDate: Date;
   isActive: boolean;
 };
 
@@ -11,6 +13,7 @@ export interface LinkStore {
   links: Link[];
   fetchLink: (email: string, token: string) => Promise<void>; // Make fetchLink async and return a promise
   addLink: (link: Link) => void;
+  // updateLink: (link: Link) => void;
 }
 
 export const useLinkStore = create<LinkStore>((set) => ({
@@ -25,14 +28,13 @@ export const useLinkStore = create<LinkStore>((set) => ({
           },
         }
       );
-    
+
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
       const fetchedLinks = await response.json();
-      console.log(fetchedLinks)
+      console.log(fetchedLinks);
       set({ links: fetchedLinks.links });
-      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -44,4 +46,12 @@ export const useLinkStore = create<LinkStore>((set) => ({
       console.error("Error adding Link");
     }
   },
+  // updateLink: (link: Link) => {
+  //   try {      
+  //     const result = updateLink(link);
+  //     console.log(result)
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 }));

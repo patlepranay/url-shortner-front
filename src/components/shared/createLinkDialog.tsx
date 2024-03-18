@@ -33,9 +33,9 @@ const CreateLinkDialog = () => {
         token!
       );
 
-      console.log(result);
       if (result?.status === 201) {
-        addLink(result.data.shortUrl);
+        addLink(result.data.urlDetails)
+        // addLink(result.data.);
         setShortURL(result.data.shortUrl);
         setShortURLVisibility(true);
       } else {
@@ -68,7 +68,7 @@ const CreateLinkDialog = () => {
   return (
     <Dialog onOpenChange={setDialogStatusOnOpen}>
       <DialogTrigger asChild>
-        <Button>Create Link</Button>
+        <Button size={'sm'}>Create Link</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

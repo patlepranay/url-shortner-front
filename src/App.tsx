@@ -4,6 +4,7 @@ import DashboardPage from "./pages/dashboard";
 import SignInPage from "./pages/sign-in";
 import SignUpPage from "./pages/sign-up";
 import ShortUrlRedirect from "./pages/shortUrlRedirect";
+import Error from "./pages/error";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,11 +25,17 @@ function App() {
       element: <SignUpPage />,
     },
     {
+      path: "/error",
+      element: <Error />,
+    },
+    {
       path: "/:shortUrl",
       element: <ShortUrlRedirect />,
     },
+    
   ]);
 
+  
   return (
     <>
       <RouterProvider router={router} />

@@ -41,3 +41,45 @@ export const createShortLinkAPI = async (url: string, token: string) => {
     return error.response;
   }
 };
+
+export const incrementLinkVisit = async (url: string) => {
+  await axios.post("http://localhost:5000/api/incrementLinkVisit", {
+    url: url,
+  });
+  return null;
+};
+
+// export const updateLink = async (link: Link) => {
+//   try {
+//     const response = await axios.post(
+//       `http://localhost:5000/api/updateLink/`,
+//       {
+//         link: link,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const checkCustomUrlAvailaibilityAPI = async (url:string,token:string) => {
+  try {
+    const result = await axios.get(
+      `http://localhost:5000/api/checkCustomUrlAvailaibility/${url}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return result
+  } catch (error) {
+    console.log(error);
+  }
+};
