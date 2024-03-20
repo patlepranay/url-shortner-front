@@ -9,11 +9,11 @@ const ShortUrlRedirect = () => {
   const fetchUrlFromDB = async () => {
     try {
       const result = await fetchUrlFromAPI(shortUrl!);
-      if (result.status == 400) {
+      if (result?.status == 400) {
         throw "Url do not exists";
       }
       incrementLinkVisit(shortUrl!);
-      const longUrl = await result.json();
+      const longUrl = await result?.json();
       window.location.replace(`https://${longUrl.urlDetails[0].originalUrl}`);
     } catch (err) {
       console.log(err);

@@ -90,8 +90,7 @@ export const checkCustomUrlAvailaibilityAPI = async (
 
 export const fetchUrlFromAPI = async (shortUrl: string) => {
   try {
-    const result = await fetch(`${BASE_URL}/api/getLink/${shortUrl}`);
-    return result;
+    return await fetch(`${BASE_URL}/api/getLink/${shortUrl}`);
   } catch (err) {
     console.log(err);
   }
