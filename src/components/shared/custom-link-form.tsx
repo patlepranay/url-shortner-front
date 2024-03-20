@@ -15,7 +15,7 @@ import { toast } from "../ui/use-toast";
 import { Button } from "../ui/button";
 
 const CustomLinkForm = () => {
-  const defaultPart = import.meta.env.VITE_BASE_URL + "/";
+  const defaultPart = import.meta.env.VITE_FRONT_BASE_URL + "/";
   const [userInput, setUserInput] = useState("");
   const { getToken } = useAuth();
 

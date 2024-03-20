@@ -23,10 +23,11 @@ axios.interceptors.response.use(
   }
 );
 
+const BASE_URL = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 export const createShortLinkAPI = async (url: string, token: string) => {
   try {
     const result = await axios.post(
-      "http://localhost:5000/api/createShortLink",
+      `${BASE_URL}/api/createShortLink`,
       { url: url },
       {
         headers: {
@@ -43,7 +44,7 @@ export const createShortLinkAPI = async (url: string, token: string) => {
 };
 
 export const incrementLinkVisit = async (url: string) => {
-  await axios.post("http://localhost:5000/api/incrementLinkVisit", {
+  await axios.post(`${BASE_URL}/api/incrementLinkVisit`, {
     url: url,
   });
   return null;
@@ -68,18 +69,30 @@ export const incrementLinkVisit = async (url: string) => {
 //   }
 // };
 
-export const checkCustomUrlAvailaibilityAPI = async (url:string,token:string) => {
+export const checkCustomUrlAvailaibilityAPI = async (
+  url: string,
+  token: string
+) => {
   try {
     const result = await axios.get(
-      `http://localhost:5000/api/checkCustomUrlAvailaibility/${url}`,
+      `${BASE_URL}/api/checkCustomUrlAvailaibility/${url}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    return result
+    return result;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const fetchUrlFromAPI = async (shortUrl: string) => {
+  try {
+    const result = await fetch(`${BASE_URL}/api/getLink/${shortUrl}`);
+    return result;
+  } catch (err) {
+    console.log(err);
   }
 };

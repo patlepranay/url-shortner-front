@@ -21,7 +21,7 @@ export const columns: ColumnDef<Link>[] = [
     accessorKey: "shortUrl",
     header: "Short Link",
     cell: ({ row }) => {
-      const base_url = import.meta.env.VITE_BASE_URL;
+      const base_url = import.meta.env.VITE_FRONT_BASE_URL;
       const shortUrl = `${base_url}/${row.getValue("shortUrl")}`;
 
       return (
