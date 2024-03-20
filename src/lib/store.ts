@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import { getLinksCreatedByUserAPI } from "./api";
 
 export type Link = {
   id: string;
@@ -20,16 +20,9 @@ export const useLinkStore = create<LinkStore>((set) => ({
   links: [],
   fetchLink: async (email, token) => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/getLinksCreatedByUser/${email}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await getLinksCreatedByUserAPI(email, token);
 
-      if (!response.ok) {
+      if (!response?.ok) {
         throw new Error("Failed to fetch data");
       }
       const fetchedLinks = await response.json();
@@ -47,7 +40,7 @@ export const useLinkStore = create<LinkStore>((set) => ({
     }
   },
   // updateLink: (link: Link) => {
-  //   try {      
+  //   try {
   //     const result = updateLink(link);
   //     console.log(result)
   //   } catch (err) {

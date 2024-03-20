@@ -23,7 +23,7 @@ axios.interceptors.response.use(
   }
 );
 
-const BASE_URL = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const createShortLinkAPI = async (url: string, token: string) => {
   try {
     const result = await axios.post(
@@ -93,5 +93,20 @@ export const fetchUrlFromAPI = async (shortUrl: string) => {
     return await fetch(`${BASE_URL}/api/getLink/${shortUrl}`);
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getLinksCreatedByUserAPI = async (email:string, token:string) => {
+  try {
+    return await fetch(
+      `${BASE_URL}/api/getLinksCreatedByUser/${email}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
   }
 };
