@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import Loading from "./components/loadin";
 const LandingPage = lazy(() => import("./pages/landing"));
 const DashboardPage = lazy(() => import("./pages/dashboard"));
 const SignInPage = lazy(() => import("./pages/sign-in"));
@@ -36,7 +37,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <Suspense fallback={<Loading/>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </>
   );
 }
