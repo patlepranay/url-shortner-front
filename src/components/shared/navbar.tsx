@@ -1,6 +1,6 @@
 import SideBar from "./sidebar";
 import CreateLinkDialog from "./createLinkDialog";
-
+import logo from '@/assets/logo.svg'
 const Navbar = () => {
   return (
     <nav className="bg-zinc-900 flex justify-between items-center">
@@ -9,7 +9,7 @@ const Navbar = () => {
 
         <SideBar />
         </div>
-        <img src="/src/assets/logo.svg" className="h-[18px] w-[18px] bg-contain"/>
+        <img src={logo} className="h-[18px] w-[18px] bg-contain"/>
         <h2 className="font-medium text-lg">url-short</h2>
       </div>
       <div className="p-4 flex items-center justify-center">
