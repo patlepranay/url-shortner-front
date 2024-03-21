@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LandingPage from "./pages/landing";
-import DashboardPage from "./pages/dashboard";
-import SignInPage from "./pages/sign-in";
-import SignUpPage from "./pages/sign-up";
-import ShortUrlRedirect from "./pages/shortUrlRedirect";
-import Error from "./pages/error";
-
+import { lazy } from "react";
+const LandingPage = lazy(() => import("./pages/landing"));
+const DashboardPage = lazy(() => import("./pages/dashboard"));
+const SignInPage = lazy(() => import("./pages/sign-in"));
+const SignUpPage = lazy(() => import("./pages/sign-up"));
+const ShortUrlRedirect = lazy(() => import("./pages/shortUrlRedirect"));
+const Error = lazy(() => import("./pages/error"));
 function App() {
   const router = createBrowserRouter([
     {
@@ -32,10 +32,8 @@ function App() {
       path: "/:shortUrl",
       element: <ShortUrlRedirect />,
     },
-    
   ]);
 
-  
   return (
     <>
       <RouterProvider router={router} />

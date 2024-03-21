@@ -19,12 +19,12 @@ const SideBar = () => {
     <>
       <section className="">
         <Sheet>
-          <SheetTrigger>
+          <SheetTrigger className=" flex items-center justify-center">
             <AlignJustify />
           </SheetTrigger>
           <SheetContent side={"left"} className=" flex flex-col">
             <SheetHeader>
-              <SheetTitle>Short URL</SheetTitle>
+              <SheetTitle>url-short</SheetTitle>
             </SheetHeader>
             <div className="flex flex-col justify-between h-full mt-4">
               <div>

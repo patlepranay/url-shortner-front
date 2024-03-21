@@ -4,12 +4,15 @@ import CreateLinkDialog from "./createLinkDialog";
 const Navbar = () => {
   return (
     <nav className="bg-zinc-900 flex justify-between items-center">
-      <div className="flex p-2 items-center ">
+      <div className="flex p-2 items-center  gap-2">
+        <div className=" flex items-center justify-center align-middle">
+
         <SideBar />
-        <img src="/public/vite.svg" />
-        ShortURL
+        </div>
+        <img src="/src/assets/logo.svg" className="h-[18px] w-[18px] bg-contain"/>
+        <h2 className="font-medium text-lg">url-short</h2>
       </div>
-      <div>
+      <div className="p-4 flex items-center justify-center">
         <CreateLinkDialog />
       </div>
     </nav>
