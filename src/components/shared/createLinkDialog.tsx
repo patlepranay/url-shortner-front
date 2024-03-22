@@ -27,6 +27,7 @@ const CreateLinkDialog = () => {
 
   const generateURL = async () => {
     try {
+      new URL(inputUrlRef?.current!.value);
       const token = await getToken();
       const result = await createShortLinkAPI(
         inputUrlRef?.current!.value,
@@ -34,8 +35,7 @@ const CreateLinkDialog = () => {
       );
 
       if (result?.status === 201) {
-        addLink(result.data.urlDetails)
-        // addLink(result.data.);
+        addLink(result.data.urlDetails);
         setShortURL(result.data.shortUrl);
         setShortURLVisibility(true);
       } else {
@@ -44,12 +44,14 @@ const CreateLinkDialog = () => {
           description: result.data.message,
         });
       }
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error :any) {
+     
       toast({
         title: "Request Failed",
-        description: "An error occurred while processing your request",
+        description: error?.message,
       });
-      console.error(error);
+      
     }
   };
 
@@ -68,7 +70,7 @@ const CreateLinkDialog = () => {
   return (
     <Dialog onOpenChange={setDialogStatusOnOpen}>
       <DialogTrigger asChild>
-        <Button size={'sm'}>Create Link</Button>
+        <Button size={"sm"}>Create Link</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

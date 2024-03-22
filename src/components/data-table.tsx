@@ -31,6 +31,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 8 })
   const table = useReactTable({
     data,
     columns,
@@ -38,8 +39,10 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onPaginationChange: setPagination,
     state: {
       columnFilters,
+      pagination
     },
   });
 
@@ -83,7 +86,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="text-left"
+                  className="text-left truncate "
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

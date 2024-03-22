@@ -15,7 +15,12 @@ export type Link = {
 export const columns: ColumnDef<Link>[] = [
   {
     accessorKey: "originalUrl",
+
     header: "Original Link",
+    cell: ({ row }) => {
+      const value = row.getValue("originalUrl") as string;
+      return <h2 className="font-medium max-w-48 truncate hover:">{value}</h2>
+    },
   },
   {
     accessorKey: "shortUrl",

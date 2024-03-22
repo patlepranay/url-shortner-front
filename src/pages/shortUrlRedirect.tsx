@@ -14,7 +14,7 @@ const ShortUrlRedirect = () => {
       }
       incrementLinkVisit(shortUrl!);
       const longUrl = await result?.json();
-      window.location.replace(`https://${longUrl.urlDetails[0].originalUrl}`);
+      window.location.replace(`${longUrl.urlDetails[0].originalUrl}`);
     } catch (err) {
       console.log(err);
       navigator("/error");
