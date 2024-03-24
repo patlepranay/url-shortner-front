@@ -18,6 +18,9 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { Switch } from "./ui/switch";
+import { Link, useLinkStore } from "@/lib/store";
+import { useAuth } from "@clerk/clerk-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -28,10 +31,16 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  
+  const { getToken } = useAuth();
+  const {changeLinkStatus}=useLinkStore();
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 8 })
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 8,
+  });
   const table = useReactTable({
     data,
     columns,
@@ -42,13 +51,13 @@ export function DataTable<TData, TValue>({
     onPaginationChange: setPagination,
     state: {
       columnFilters,
-      pagination
+      pagination,
     },
   });
 
   return (
     <div className="flex flex-col justify-between rounded-md border h-full ">
-      <div>
+      <div className="">
         <div className="flex items-center p-2">
           <Input
             placeholder="Filter Links..."
@@ -86,16 +95,34 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="text-left truncate "
+                  className="text-left truncate"
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    if (cell.column.id == "isActives") {
+                      const value = cell.row.getValue("isActive") as boolean;
+                      return (
+                        <TableCell key={cell.id}>
+                          <Switch
+                            defaultChecked={value!}
+                            onCheckedChange={async (e) => {
+                              const link = row.original as Link;
+                              const token = await getToken();
+                              link.isActive = e;
+                              changeLinkStatus(link, token!);
+                            }}
+                          />
+                        </TableCell>
+                      );
+                    }
+                    return (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))
             ) : (

@@ -40,8 +40,8 @@ const DashboardPage = () => {
       <SignedIn>
         <main className="grid min-h-screen grid-rows-[auto,1fr,auto]">
           <Navbar />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-2">
-            <div className="col-span-1 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-2 ">
+            <div className="col-span-1 h-[85vh] md:h-full ">
               <DataTable columns={columns} data={links as never} />
             </div>
 

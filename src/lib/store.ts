@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { getLinksCreatedByUserAPI } from "./api";
+import { changeLinkStatusAPI, getLinksCreatedByUserAPI } from "./api";
+import { toast } from "@/components/ui/use-toast";
 
 export type Link = {
   id: string;
@@ -13,7 +14,7 @@ export interface LinkStore {
   links: Link[];
   fetchLink: (email: string, token: string) => Promise<void>; // Make fetchLink async and return a promise
   addLink: (link: Link) => void;
-  // updateLink: (link: Link) => void;
+  changeLinkStatus: (link: Link, token: string) => void;
 }
 
 export const useLinkStore = create<LinkStore>((set) => ({
@@ -26,7 +27,6 @@ export const useLinkStore = create<LinkStore>((set) => ({
         throw new Error("Failed to fetch data");
       }
       const fetchedLinks = await response.json();
-      console.log(fetchedLinks);
       set({ links: fetchedLinks.links });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -39,12 +39,27 @@ export const useLinkStore = create<LinkStore>((set) => ({
       console.error("Error adding Link");
     }
   },
-  // updateLink: (link: Link) => {
-  //   try {
-  //     const result = updateLink(link);
-  //     console.log(result)
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
+  changeLinkStatus: async (link: Link, token: string) => {
+    try {
+      const response = await changeLinkStatusAPI(link, token);
+      if (response?.status == 201) {
+        const link = response.data.updatedLink;
+        set((state) => {
+          const index = state.links.findIndex((el) => el.id === link.id);
+          state.links[index].isActive = link.isActive;
+          
+          return {links:[...state.links]}  
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "Failed to update status",
+      });
+      console.log(err);
+    }
+  },
 }));
+
+// const unsubscribe = useLinkStore.subscribe(
+//   (currentState) => console.log('State changed:', currentState)
+// );

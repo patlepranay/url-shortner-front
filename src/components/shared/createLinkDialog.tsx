@@ -19,6 +19,7 @@ import { createShortLinkAPI } from "@/lib/api";
 
 const CreateLinkDialog = () => {
   const [shortUrl, setShortURL] = useState("");
+  const [loading, setLoading] = useState(false);
   const inputUrlRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const { getToken } = useAuth();
@@ -27,6 +28,7 @@ const CreateLinkDialog = () => {
 
   const generateURL = async () => {
     try {
+      setLoading(true);
       new URL(inputUrlRef?.current!.value);
       const token = await getToken();
       const result = await createShortLinkAPI(
@@ -44,14 +46,14 @@ const CreateLinkDialog = () => {
           description: result.data.message,
         });
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error :any) {
-     
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast({
         title: "Request Failed",
         description: error?.message,
       });
-      
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,7 +113,7 @@ const CreateLinkDialog = () => {
           </div>
         )}
         <DialogFooter>
-          <Button type="button" onClick={generateURL}>
+          <Button type="button" disabled={loading} onClick={generateURL}>
             Generate URL
           </Button>
         </DialogFooter>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Link } from "./store";
 
 // Add a response interceptor
 axios.interceptors.response.use(
@@ -24,11 +25,11 @@ axios.interceptors.response.use(
 );
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-export const createShortLinkAPI = async (url: string, token: string) => {
+export const createShortLinkAPI = async (url: string, token: string,customUrl?:string) => {
   try {
     const result = await axios.post(
       `${BASE_URL}/api/createShortLink`,
-      { url: url },
+      { url: url ,customShortUrl:customUrl},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -50,24 +51,23 @@ export const incrementLinkVisit = async (url: string) => {
   return null;
 };
 
-// export const updateLink = async (link: Link) => {
-//   try {
-//     const response = await axios.post(
-//       `http://localhost:5000/api/updateLink/`,
-//       {
-//         link: link,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const changeLinkStatusAPI = async (link: Link, token: string) => {
+  try {
+    return await axios.post(
+      `http://localhost:5000/api/changeLinkStatus`,
+      {
+        link: link,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const checkCustomUrlAvailaibilityAPI = async (
   url: string,
@@ -88,7 +88,7 @@ export const checkCustomUrlAvailaibilityAPI = async (
   }
 };
 
-export const fetchUrlFromAPI = async (shortUrl: string) => {
+export const  fetchUrlFromAPI = async (shortUrl: string) => {
   try {
     return await fetch(`${BASE_URL}/api/getLink/${shortUrl}`);
   } catch (err) {
@@ -96,16 +96,16 @@ export const fetchUrlFromAPI = async (shortUrl: string) => {
   }
 };
 
-export const getLinksCreatedByUserAPI = async (email:string, token:string) => {
+export const getLinksCreatedByUserAPI = async (
+  email: string,
+  token: string
+) => {
   try {
-    return await fetch(
-      `${BASE_URL}/api/getLinksCreatedByUser/${email}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    return await fetch(`${BASE_URL}/api/getLinksCreatedByUser/${email}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
     console.log(error);
   }

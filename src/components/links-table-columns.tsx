@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
-import { Activity, Radiation } from "lucide-react";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -19,7 +18,7 @@ export const columns: ColumnDef<Link>[] = [
     header: "Original Link",
     cell: ({ row }) => {
       const value = row.getValue("originalUrl") as string;
-      return <h2 className="font-medium max-w-48 truncate hover:">{value}</h2>
+      return <h2 className="font-medium max-w-48 truncate hover:">{value}</h2>;
     },
   },
   {
@@ -53,26 +52,31 @@ export const columns: ColumnDef<Link>[] = [
     accessorKey: "visits",
     header: "Visitors",
   },
-  {
-    accessorKey: "isActive",
-    header: () => "Active",
-    cell: ({ row }) => {
-      const value: boolean = row.getValue("isActive");
-      return value ? (
-        <Activity className="text-green-700" />
-      ) : (
-        <Radiation className="text-red-700" />
-      );
-      // <Switch
-      // disabled
-      //   defaultChecked={value}
-      //   onCheckedChange={(e) => {
-      //     let link:Link = row.original;
-      //     link.isActive = e;
-      //     useLinkStore.getState().updateLink(link)
+  // {
+  //   accessorKey: "isActive",
+  //   header: () => "Active",
+  //   cell: ({ row }) => {
+  //     const value: boolean = row.getValue("isActive");
+  //     return value ? (
+  //       <Activity className="text-green-700" />
+  //     ) : (
+  //       <Radiation className="text-red-700" />
+  //     );
+  //     // <Switch
+  //     // disabled
+  //     //   defaultChecked={value}
+  //     //   onCheckedChange={(e) => {
+  //     //     let link:Link = row.original;
+  //     //     link.isActive = e;
+  //     //     useLinkStore.getState().updateLink(link)
 
-      //   }}
-      // />
-    },
+  //     //   }}
+  //     // />
+  //   },
+  // },
+  {
+    accessorKey: "isActives",
+    header: () => "Status",
+    
   },
 ];
