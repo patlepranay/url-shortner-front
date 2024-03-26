@@ -11,23 +11,26 @@ import {
   useAuth,
   useUser,
 } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CustomLinkForm from "@/components/shared/custom-link-form";
 import { Card, CardTitle } from "@/components/ui/card";
+import Loading from "@/components/loadin";
 
 const DashboardPage = () => {
   const { fetchLink } = useLinkStore();
   const { getToken } = useAuth();
   const { user } = useUser();
   const { links } = useLinkStore();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
       const email = user.emailAddresses?.[0]?.emailAddress; // Using optional chaining
       (async () => {
+        setLoading(true);
         const token = await getToken();
-
-        fetchLink(email, token!);
+        result = await fetchLink(email, token!);
+        setLoading(false);
       })();
     }
   }, [user]);
@@ -42,7 +45,13 @@ const DashboardPage = () => {
           <Navbar />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-2 ">
             <div className="col-span-1 h-[85vh] md:h-full ">
-              <DataTable columns={columns} data={links as never} />
+              {loading ? (
+                <Card className="">
+                  <Loading />
+                </Card>
+              ) : (
+                <DataTable columns={columns} data={links as never} />
+              )}
             </div>
 
             <div className="col-span-1 flex flex-col gap-2">
