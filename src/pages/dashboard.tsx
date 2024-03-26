@@ -29,7 +29,7 @@ const DashboardPage = () => {
       (async () => {
         setLoading(true);
         const token = await getToken();
-        result = await fetchLink(email, token!);
+        await fetchLink(email, token!);
         setLoading(false);
       })();
     }

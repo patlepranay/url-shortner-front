@@ -75,7 +75,7 @@ export const columns: ColumnDef<Link>[] = [
   //   },
   // },
   {
-    accessorKey: "isActives",
+    accessorKey: "isActive",
     header: () => "Status",
     
   },

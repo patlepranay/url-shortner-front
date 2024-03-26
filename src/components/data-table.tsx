@@ -98,8 +98,9 @@ export function DataTable<TData, TValue>({
                   className="text-left truncate"
                 >
                   {row.getVisibleCells().map((cell) => {
-                    if (cell.column.id == "isActives") {
-                      const value = cell.row.getValue("isActive") as boolean;
+                    if (cell.column.id == "isActive") {
+                      const value = cell.getValue() as boolean
+                      console.log(value)
                       return (
                         <TableCell key={cell.id}>
                           <Switch
