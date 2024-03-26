@@ -54,7 +54,7 @@ export const incrementLinkVisit = async (url: string) => {
 export const changeLinkStatusAPI = async (link: Link, token: string) => {
   try {
     return await axios.post(
-      `http://localhost:5000/api/changeLinkStatus`,
+      `${BASE_URL}/api/changeLinkStatus`,
       {
         link: link,
       },
