@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# Custom Short URL Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend code for a website that allows users to create custom short URLs for long links. The frontend is built using React with TypeScript, incorporating Shadcn UI, Tailwind CSS, AeternityUI, Zustand for state management, and integrates Clerk for authentication.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Custom Short URLs**: Users can create custom short URLs for their long links, making them easier to share.
+- **Authentication**: Integration with Clerk provides secure user authentication.
+- **User Interface**: Designed using Shadcn UI, Tailwind CSS, and AeternityUI for a modern and responsive user interface.
+- **State Management**: Zustand is used for state management, providing a simple and efficient way to manage application state.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Shadcn UI**: A UI framework for React applications.
+- **Tailwind CSS**: A utility-first CSS framework for creating custom designs.
+- **AeternityUI**: A UI library for building applications on the Aeternity blockchain.
+- **Zustand**: A small, fast, and scalable state management library for React.
+- **Clerk**: Authentication and user management solution.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Follow these instructions to get the project up and running on your local machine.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Prerequisites
+
+- Node.js and npm installed on your machine
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/custom-short-url-frontend.git
+   
+2. Navigate to the project directory:
+
+    ```bash
+    cd custom-short-url-frontend
+3. Install dependencies:
+
+    ```bash
+    npm install
+4. Set up environment variables
+    Create a .env file in the root directory.
+    Define the required environment variables such as Clerk credentials.
+5. Run the development server:
+
+    ```bash
+    npm run dev
+6. Access the website in your browser at http://localhost:5173.
+
+### Contributing
+Contributions are welcome! Feel free to submit pull requests or open issues for any bugs or feature requests.
